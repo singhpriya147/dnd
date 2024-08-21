@@ -1,15 +1,16 @@
 
-// import './App.css'
+import './App.css'
 import DragAndDropBuilder from "./components/DragAndDropBuilder"
 function App() {
   
 
   return (
     <>
-      <h1>hello</h1>
-      <DragAndDropBuilder></DragAndDropBuilder>
+      <div className="DndWrappper">
+        <DragAndDropBuilder></DragAndDropBuilder>
+      </div>
     </>
-  )
+  );
 }
 
 export default App
