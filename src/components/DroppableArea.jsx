@@ -2,11 +2,16 @@
 
 
 
-// DroppableArea.js
+
+
+
+
+
+
 import { useDroppable } from '@dnd-kit/core';
 import DraggableItem from './DraggableItem';
 
-function DroppableArea({ items }) {
+function DroppableArea({ items, setItems }) {
   const { isOver, setNodeRef } = useDroppable({
     id: 'canvas',
   });
@@ -19,10 +24,45 @@ function DroppableArea({ items }) {
     flex: 1,
   };
 
-  const renderItem = (id, type) => {
+  const handleDoubleClick = (id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, isEditing: true } : item
+      )
+    );
+  };
+
+  const handleChange = (e, id) => {
+    const newText = e.target.value;
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, text: newText } : item
+      )
+    );
+  };
+
+  const handleBlur = (id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, isEditing: false } : item
+      )
+    );
+  };
+
+  const renderItem = (id, type, text, isEditing) => {
     switch (type) {
       case 'Label':
-        return <label>Label</label>;
+        return isEditing ? (
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => handleChange(e, id)}
+            onBlur={() => handleBlur(id)}
+            autoFocus
+          />
+        ) : (
+          <label onDoubleClick={() => handleDoubleClick(id)}>{text}</label>
+        );
       case 'InputBox':
         return <input type='text' placeholder='Input' />;
       case 'CheckBox':
@@ -62,10 +102,10 @@ function DroppableArea({ items }) {
           <div
             style={{
               transform: `translate3d(${item?.x}px, ${item?.y}px, 0)`,
-              // background: 'red',
+              
             }}
           >
-            {renderItem(item?.id, item?.type)}
+            {renderItem(item.id, item.type, item.text, item.isEditing)}
           </div>
         </DraggableItem>
       ))}
