@@ -3,17 +3,23 @@ import { DndContext } from '@dnd-kit/core';
 import DraggableItem from './DraggableItem';
 import DroppableArea from './DroppableArea';
 
+
 function DragAndDropBuilder() {
   const [items, setItems] = useState([]);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
-
-    if (over) {
+console.log("event",event);
+    if ( active.data.current.source==='control' && over) {
       // Add the dragged item to the droppable area
       setItems((prevItems) => [...prevItems, active.id]);
     }
+    else if(active.data.current.source==='droppableArea' && over)
+    {
+     console.log(event,"dragged"); 
+    }
   };
+ 
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
@@ -26,14 +32,24 @@ function DragAndDropBuilder() {
         }}
       >
         <div className='controls' style={{ marginRight: '20px' }}>
-          <DraggableItem id='Label'>Label</DraggableItem>
-          <DraggableItem id='InputBox'>Input</DraggableItem>
-          <DraggableItem id='CheckBox'>Check Box</DraggableItem>
-          <DraggableItem id='Button'>Button</DraggableItem>
-          <DraggableItem id='Table'>Table</DraggableItem>
+          <DraggableItem id='Label' source='control'>
+            Label
+          </DraggableItem>
+          <DraggableItem id='InputBox' source='control'>
+            Input
+          </DraggableItem>
+          <DraggableItem id='CheckBox' source='control'>
+            Check Box
+          </DraggableItem>
+          <DraggableItem id='Button' source='control'>
+            Button
+          </DraggableItem>
+          <DraggableItem id='Table' source='control'>
+            Table
+          </DraggableItem>
         </div>
       </div>
-     
+    
         <DroppableArea items={items} />
     
     </DndContext>

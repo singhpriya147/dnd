@@ -1,4 +1,5 @@
 import {  useDroppable } from '@dnd-kit/core';
+import DraggableItem from './DraggableItem';
 
 
 function DroppableArea({ items }) {
@@ -58,23 +59,13 @@ function DroppableArea({ items }) {
 
   return (
     <>
-      <div  ref={setNodeRef} style={style} 
-     
-      >
-      
-        {items.map((item) => (
-         <>
-             {
-            
-             renderItem(item)
-             
-             
-             }
-
-         </>
-
-       
+      <div ref={setNodeRef} style={style}>
+        {items.map((item,index) => (
+          <>
+          {console.log(item,"line4")}
+          {<DraggableItem id={index+1} source="droppableArea">{renderItem(item)}</DraggableItem>}</>
         ))}
+        
       </div>
     </>
   );
