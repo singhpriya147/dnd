@@ -30,3 +30,18 @@
   border: 2px dashed #ccc;
   min-height: 500px;
 }
+.DroppableAreaWrapper{
+  width: 100%;
+  border:2px solid black
+}
+.DroppableAreaHeader{
+  height:50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.DroppableAreaContent{
+  display: flex;
+  gap:2rem;
+}

@@ -20,7 +20,7 @@ function DraggableItem({ id, children, source }) {
   };
 
 
-  console.log(transform , 'transform comp')
+  // console.log(transform , 'transform comp')
   return (
     <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
       {children}
