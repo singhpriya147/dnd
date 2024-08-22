@@ -9,9 +9,7 @@ function App() {
       <div className='DndWrappper'>
         <DragAndDropBuilder></DragAndDropBuilder>
       </div>
-      <div className='bottom-button'>
-        <button>save</button>
-      </div>
+      
     </div>
   );
 }
