@@ -60,6 +60,9 @@
   margin:0.5rem
 }
 
+label {
+  white-space: pre-wrap; /* Ensures spaces and line breaks are preserved */
+}
 @media (max-width:920px) {
   .DndWrappper{
     flex-direction: column;

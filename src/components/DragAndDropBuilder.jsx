@@ -58,6 +58,7 @@ const publishLayout = () => {
     // console.log('eventHere', event);
 
     if (active.data.current.source === 'control' && over.id === 'canvas') {
+      
       let type, text = '';
       switch (active.id) {
         case 'a1':
@@ -72,6 +73,7 @@ const publishLayout = () => {
           break;
         case 'a4':
           type = 'button';
+           text = 'Editable Button';
           break;
         case 'a5':
           type = 'Table';
@@ -81,10 +83,13 @@ const publishLayout = () => {
       }
 
       // Add the dragged item to the droppable area
-      setItems((prevItems) => [
+      setItems((prevItems) =>{ 
+        //  console.log('Adding item with text:', text);
+
+        return [
         ...prevItems,
         { type, id: items.length + 1, x: 0, y: 0, isEditing: false, text },
-      ]);
+      ]});
     } else if (
       active.data.current.source === 'droppableArea' &&
       collisions.length > 0 &&

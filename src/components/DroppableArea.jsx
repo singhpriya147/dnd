@@ -34,11 +34,13 @@ function DroppableArea({ items, setItems }) {
 
   const handleChange = (e, id) => {
     const newText = e.target.value;
+     console.log('Adding item with text:', newText);
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, text: newText } : item
       )
     );
+    console.log('Adding item with text:', newText);
   };
 
   const handleBlur = (id) => {
@@ -50,8 +52,11 @@ function DroppableArea({ items, setItems }) {
   };
 
   const renderItem = (id, type, text, isEditing) => {
+       
+
     switch (type) {
       case 'Label':
+        // console.log('Adding item with text:', text);
         return isEditing ? (
           <input
             type="text"
@@ -67,12 +72,22 @@ function DroppableArea({ items, setItems }) {
         return <input type='text' placeholder='Input' />;
       case 'CheckBox':
         return (
-          <div>
+          
             <input type='checkbox' />
-          </div>
+         
         );
       case 'button':
-        return <button>button</button>;
+        return isEditing ? (
+          <input
+            type='text'
+            value={text}
+            onChange={(e) => handleChange(e, id)}
+            onBlur={() => handleBlur(id)}
+            autoFocus
+          />
+        ) : (
+          <button onDoubleClick={() => handleDoubleClick(id)}>{text}</button>
+        );
       case 'Table':
         return (
           <table>
@@ -102,10 +117,10 @@ function DroppableArea({ items, setItems }) {
           <div
             style={{
               transform: `translate3d(${item?.x}px, ${item?.y}px, 0)`,
-              
             }}
           >
             {renderItem(item.id, item.type, item.text, item.isEditing)}
+            
           </div>
         </DraggableItem>
       ))}
