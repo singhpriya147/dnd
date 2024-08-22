@@ -6,12 +6,12 @@ function App() {
 
   return (
     <div>
-      
-      <div className="DndWrappper">
-        
+      <div className='DndWrappper'>
         <DragAndDropBuilder></DragAndDropBuilder>
       </div>
-      <button>save</button>
+      <div className='bottom-button'>
+        <button>save</button>
+      </div>
     </div>
   );
 }

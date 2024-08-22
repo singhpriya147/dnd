@@ -17,7 +17,7 @@ function DroppableArea({ items, setItems }) {
   });
 
   const style = {
-    backgroundColor: isOver ? 'lightgreen' : 'grey',
+    backgroundColor: isOver ? 'lightgreen' : 'white',
     minHeight: '400px',
     border: '2px dashed black',
     padding: '20px',

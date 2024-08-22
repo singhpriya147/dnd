@@ -106,8 +106,8 @@ const publishLayout = () => {
       <div
         style={{
           display: 'flex',
-          backgroundColor: 'yellow',
-          border: '1px solid red',
+          backgroundColor: '#A8A8A8',
+          
         }}
       >
         <div className='controls' style={{ marginRight: '20px' }}>
@@ -132,12 +132,15 @@ const publishLayout = () => {
         <div className='DroppableAreaHeader'>
           <div className='DroppableAreaContent'>
             <label htmlFor='layoutName'>Enter the layout name </label>
-            <input type='text' id='layoutName'
-            value={layoutName}
-            onChange={(e)=>setLayoutName(e.target.value)}></input>
+            <input
+              type='text'
+              id='layoutName'
+              value={layoutName}
+              onChange={(e) => setLayoutName(e.target.value)}
+            ></input>
             <button onClick={saveLayout}>Save layout</button>
             <button onClick={loadLayout}>Load Layout</button>
-            <button onClick ={publishLayout}>Publish</button>
+            <button onClick={publishLayout}>Publish</button>
           </div>
         </div>
         <DroppableArea items={items} setItems={setItems} />
