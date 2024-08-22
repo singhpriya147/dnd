@@ -21,7 +21,7 @@ function DragAndDropBuilder() {
     }
     try {
       await setDoc(doc(db, 'layouts', 'layoutName'), {
-        items, // The items state that holds your current layout
+        items,
       });
       alert('Layout saved successfully!');
     } catch (error) {
