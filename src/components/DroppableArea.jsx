@@ -1,19 +1,12 @@
-
-
-
-
-
-
-
-
-
-
 import { useDroppable } from '@dnd-kit/core';
 import DraggableItem from './DraggableItem';
+import { useState } from 'react';
 
 function DroppableArea({ items, setItems }) {
+  const [isDisabled, setIsDisabled] = useState(false);
   const { isOver, setNodeRef } = useDroppable({
     id: 'canvas',
+    disabled: isDisabled,
   });
 
   const style = {
@@ -25,6 +18,7 @@ function DroppableArea({ items, setItems }) {
   };
 
   const handleDoubleClick = (id) => {
+    setIsDisabled(true);
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, isEditing: true } : item
@@ -34,7 +28,8 @@ function DroppableArea({ items, setItems }) {
 
   const handleChange = (e, id) => {
     const newText = e.target.value;
-     console.log('Adding item with text:', newText);
+    console.log('Adding item with text:', newText);
+    console.log(e.target);
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, text: newText } : item
@@ -49,17 +44,16 @@ function DroppableArea({ items, setItems }) {
         item.id === id ? { ...item, isEditing: false } : item
       )
     );
+     setIsDisabled(false);
   };
 
   const renderItem = (id, type, text, isEditing) => {
-       
-
     switch (type) {
       case 'Label':
-        // console.log('Adding item with text:', text);
+        console.log('text in case of label', text);
         return isEditing ? (
           <input
-            type="text"
+            type='text'
             value={text}
             onChange={(e) => handleChange(e, id)}
             onBlur={() => handleBlur(id)}
@@ -71,16 +65,12 @@ function DroppableArea({ items, setItems }) {
       case 'InputBox':
         return <input type='text' placeholder='Input' />;
       case 'CheckBox':
-        return (
-          
-            <input type='checkbox' />
-         
-        );
+        return <input type='checkbox' />;
       case 'button':
         return isEditing ? (
           <input
             type='text'
-            value={text}
+            // value={text}
             onChange={(e) => handleChange(e, id)}
             onBlur={() => handleBlur(id)}
             autoFocus
@@ -111,7 +101,7 @@ function DroppableArea({ items, setItems }) {
   };
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div ref={setNodeRef} style={style} disabled={true}>
       {items.map((item) => (
         <DraggableItem key={item.id} id={item.id} source='droppableArea'>
           <div
@@ -120,7 +110,6 @@ function DroppableArea({ items, setItems }) {
             }}
           >
             {renderItem(item.id, item.type, item.text, item.isEditing)}
-            
           </div>
         </DraggableItem>
       ))}

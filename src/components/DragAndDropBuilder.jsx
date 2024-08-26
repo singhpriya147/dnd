@@ -15,10 +15,10 @@ function DragAndDropBuilder() {
   const [items, setItems] = useState([]);
   const [layoutName,setLayoutName]=useState('');
   const saveLayout = async () => {
-    if (layoutName.trim() === '') {
-      alert('Please enter a layout name');
-      return;
-    }
+    // if (layoutName.trim() === '') {
+    //   alert('Please enter a layout name');
+    //   return;
+    // }
     try {
       await setDoc(doc(db, 'layouts', 'layoutName'), {
         items,
@@ -58,9 +58,10 @@ const publishLayout = () => {
     // console.log('eventHere', event);
 
     if (active.data.current.source === 'control' && over.id === 'canvas') {
-      
+     
       let type, text = '';
       switch (active.id) {
+       
         case 'a1':
           type = 'Label';
           text = 'Editable Label';
@@ -106,6 +107,8 @@ const publishLayout = () => {
     }
   };
 
+
+  
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div
@@ -142,6 +145,7 @@ const publishLayout = () => {
               id='layoutName'
               value={layoutName}
               onChange={(e) => setLayoutName(e.target.value)}
+              
             ></input>
             <button onClick={saveLayout}>Save layout</button>
             <button onClick={loadLayout}>Load Layout</button>
