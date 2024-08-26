@@ -15,10 +15,10 @@ function DragAndDropBuilder() {
   const [items, setItems] = useState([]);
   const [layoutName,setLayoutName]=useState('');
   const saveLayout = async () => {
-    // if (layoutName.trim() === '') {
-    //   alert('Please enter a layout name');
-    //   return;
-    // }
+    if (layoutName.trim() === '') {
+      alert('Please enter a layout name');
+      return;
+    }
     try {
       await setDoc(doc(db, 'layouts', 'layoutName'), {
         items,
